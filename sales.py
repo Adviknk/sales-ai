@@ -20,7 +20,6 @@ plt.show()
 product_line_analysis = product_line_analysis.sort_values(
     'Total', ascending=False)
 
-# Plot the total revenue by product line
 plt.figure(figsize=(10, 6))
 product_line_analysis['Total'].plot(kind='bar', color='green')
 plt.title('Total Revenue by Product Line')
