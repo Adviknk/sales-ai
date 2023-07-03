@@ -4,11 +4,9 @@ import matplotlib.pyplot as plt
 # Load the sales data into a DataFrame
 sales_data = pd.read_csv('supermarket_sales_data.csv')
 
-# Group the data by product line and calculate total sales quantity and revenue
 product_line_analysis = sales_data.groupby(
     'Product line').agg({'Quantity': 'sum', 'Total': 'sum'})
 
-# Sort the analysis results by total sales quantity in descending order
 product_line_analysis = product_line_analysis.sort_values(
     'Quantity', ascending=False)
 
