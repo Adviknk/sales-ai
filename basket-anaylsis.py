@@ -1,6 +1,8 @@
 import pandas as pd
 from mlxtend.frequent_patterns import apriori, association_rules
 from sklearn.model_selection import train_test_split
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 
@@ -20,6 +22,12 @@ rating_features = ['Customer type', 'Gender', 'Unit price', 'Quantity', 'Tax 5%'
 # Split the data into features and target variable
 X = data[rating_features]
 y = data['Rating']
+
+categorical_features = ['Branch', 'City',
+                        'Customer type', 'Gender', 'Product line', 'Payment']
+preprocessor = ColumnTransformer(transformers=[(
+    'cat', OneHotEncoder(), categorical_features)], remainder='passthrough')
+X_encoded = preprocessor.fit_transform(X)
 
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
